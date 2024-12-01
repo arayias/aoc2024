@@ -2,7 +2,7 @@ from helper import read_file
 
 
 def solve_p1():
-    x = read_file("./input/1.txt").split('\n')
+    x = read_file(__file__).split('\n')
     l1, l2 = [], []
     for l in x:
         n1, n2 = map(int, l.split())
@@ -19,7 +19,7 @@ def solve_p1():
 
 
 def solve_p2():
-    x = read_file("./input/1.txt").split('\n')
+    x = read_file(__file__).split('\n')
     l1, l2 = {}, {}
     for l in x:
         n1, n2 = map(int, l.split())
