@@ -13,7 +13,7 @@ def solve_p1():
 
     TO_FIND = "XMAS"
     MAX_ROWS = len(x) if x else -1
-    MAX_COLS = len(x[0]) if x else -1
+    MAX_COLS = len(x[0]) if x and x[0] else -1
 
     LEFT, RIGHT, UP, DOWN = (0, -1), (0, 1), (-1, 0), (1, 0)
     D1, D2, D3, D4 = (1, 1), (1, -1), (-1, 1), (-1, -1)
@@ -26,7 +26,7 @@ def solve_p1():
         for col, char in enumerate(line):
             if char == TO_FIND[0]:
                 for move in valid_moves:
-                    q.append((1, (row, col), move))  # Start with index 1 (second char)
+                    q.append((1, (row, col), move))  # start with index 1
 
     while q:
         looking_idx, pos, change = q.popleft()
@@ -48,8 +48,37 @@ def solve_p1():
 
 
 def solve_p2():
-    x = read_file(__file__).split('\n')
+    x = read_file(__file__).splitlines()
+    MAX_ROWS, MAX_COLS = len(x), len(x[0]) if x else 0
+
+    POS_DIAG = [(1, 1), (-1, -1)]
+    NEG_DIAG = [(1, -1), (-1, 1)]
+    DIAG_GROUPS = [POS_DIAG, NEG_DIAG]
+
+    def get_diagonal_chars(row, col, directions):
+        chars = set()
+        for dr, dc in directions:
+            new_row, new_col = row + dr, col + dc
+            if is_valid_pos((new_row, new_col), MAX_ROWS, MAX_COLS):
+                chars.add(x[new_row][new_col])
+            else:
+                return set()
+        return chars
+
     ans = 0
+    for row, line in enumerate(x):
+        for col, char in enumerate(line):
+            if char != "A":
+                continue
+
+            valid = all(
+                (chars := get_diagonal_chars(row, col, directions))
+                and {"M", "S"}.issubset(chars)
+                for directions in DIAG_GROUPS
+            )
+            if valid:
+                ans += 1
+
     return ans
 
 
