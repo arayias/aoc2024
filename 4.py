@@ -48,15 +48,15 @@ def solve_p1():
 
 
 def solve_p2():
-    x = read_file(__file__).splitlines()
+    x = read_file(__file__).split("\n")
     MAX_ROWS, MAX_COLS = len(x), len(x[0]) if x else 0
 
     POS_DIAG = [(1, 1), (-1, -1)]
     NEG_DIAG = [(1, -1), (-1, 1)]
     DIAG_GROUPS = [POS_DIAG, NEG_DIAG]
 
-    def get_diagonal_chars(row, col, directions):
-        chars = set()
+    def get_diagonal_chars(row: int, col: int , directions: List[Tuple[int,int]]) -> Set[str]:
+        chars: Set[str] = set()
         for dr, dc in directions:
             new_row, new_col = row + dr, col + dc
             if is_valid_pos((new_row, new_col), MAX_ROWS, MAX_COLS):
