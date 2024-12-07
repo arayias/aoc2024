@@ -1,5 +1,5 @@
-from collections import defaultdict, deque
 from typing import Dict, Set, List, Tuple
+from collections import defaultdict, deque
 from helper import read_file
 
 
