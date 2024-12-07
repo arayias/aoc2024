@@ -1,7 +1,7 @@
 from helper import read_file
+from typing import List
 
-def can_produce_target(nums, target, idx=0, current=0):
-
+def can_produce_target(nums : List[int], target : int, idx : int = 0 , current : int = 0) -> bool:
     if current > target:
         return False
 
@@ -17,14 +17,13 @@ def can_produce_target(nums, target, idx=0, current=0):
     return False
 
 
-def can_produce_target_with_concat(nums, target, idx=0, current=0):
+def can_produce_target_with_concat(nums : List[int], target : int, idx : int =0, current : int= 0) -> bool:
 
     if current > target:
         return False
 
     if idx == len(nums):
         return current == target
-
 
     if can_produce_target_with_concat(nums, target, idx + 1, current + nums[idx]):
         return True
