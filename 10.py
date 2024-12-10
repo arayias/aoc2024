@@ -2,7 +2,7 @@ from collections import deque
 from helper import read_file
 from typing import List, Set, Tuple
 
-def get_neighbors(grid, r, c):
+def get_neighbors(grid : List[List[int]], r : int , c : int) -> List[Tuple[int,int]] :
     directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
     rows, cols = len(grid), len(grid[0])
     neighbors = []
